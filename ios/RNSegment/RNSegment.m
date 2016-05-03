@@ -1,7 +1,8 @@
 #import "RNSegment.h"
 #import <Analytics/SEGAnalyics.h>
 
-@implementation RNSegment
+@implementation RNSegment {
+}
 
 RCT_EXPORT_MODULE();
 
