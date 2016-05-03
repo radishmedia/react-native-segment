@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "41288B5F26B7AA6248BD1517EA511E315DC832A0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "41288B5F26B7AA6248BD1517EA511E315DC832A0" : 0,
+    "B5C35AB57044E4736EFD7AF47387CB3C403BA9D6" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3627A6EA-7E2B-4A08-83C2-47BA6D274946",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "41288B5F26B7AA6248BD1517EA511E315DC832A0" : "react-native-segment\/",
+    "B5C35AB57044E4736EFD7AF47387CB3C403BA9D6" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RNSegment",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/RNSegment.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/radishmedia\/react-native-segment.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "41288B5F26B7AA6248BD1517EA511E315DC832A0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:radishmedia\/noah-client.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B5C35AB57044E4736EFD7AF47387CB3C403BA9D6"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "react-native-segment",
+  "version": "1.0.0",
+  "description": "React Native Segment for using native Segment libraries on iOS and Android",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radishmedia/react-native-segment.git"
+  },
+  "keywords": [
+    "react",
+    "segment"
+  ],
+  "author": "Radishmedia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radishmedia/react-native-segment/issues"
+  },
+  "homepage": "https://github.com/radishmedia/react-native-segment#readme"
+}
