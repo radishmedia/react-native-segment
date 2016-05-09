@@ -1,5 +1,5 @@
 #import "RNSegment.h"
-#import <Analytics/SEGAnalyics.h>
+#import "SEGAnalyics.h"
 
 @implementation RNSegment {
 }
