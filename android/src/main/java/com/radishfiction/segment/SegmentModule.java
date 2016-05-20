@@ -47,21 +47,21 @@ public class SegmentModule extends ReactContextBaseJavaModule {
     if (traits.hasKey("CreatedAt")) {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
     }
-    copyElements<Traits>(traits, _traits)
+    copyElements(traits, _traits)
     Analytics.with(context).identify(userId, _traits, null);
   }
 
   @ReactMethod
   public void screen(String category, String name, ReadableMap properties, ReadableMap options) {
     Properties _props = new Properties();
-    copyElements<Properties>(properties, _properties);
+    copyElements(properties, _properties);
     Analytics.with(context).screen(category, name, _properties, null);
   }
 
   @ReactMethod
   public void track(String event, ReadableMap properties, ReadableMap options) {
     Properties _props = new Properties();
-    copyElements<Properties>(properties, _properties);
+    copyElements(properties, _properties);
     Analytics.with(context).track(event, _properties, null);
   }
 }
