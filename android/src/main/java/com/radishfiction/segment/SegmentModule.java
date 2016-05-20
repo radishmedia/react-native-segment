@@ -20,19 +20,19 @@ public class SegmentModule extends ReactContextBaseJavaModule {
     Analytics.setSingletonInstance(analytics);
   }
 
-  private <T> copyElements(ReadableMap map, T target) {
+  private <T> void copyElements(ReadableMap map, T target) {
     Iterator it = map.keySetIterator();
     while (it.hasNextKey()) {
       String key = it.nextKey();
       switch (map.getType(key)) {
         case "Boolean":
-          target.putValue(traits.getBoolean(key);
+          target.putValue(traits.getBoolean(key));
           break;
         case "Number": // TODO: What about Double?
-          target.putValue(traits.getInt(key);
+          target.putValue(traits.getInt(key));
           break;
         case "String":
-          target.putValue(traits.getString(key);
+          target.putValue(traits.getString(key));
           break;
       }
     }
@@ -42,7 +42,7 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   public void identity(String userId, ReadableMap traits, ReadableMap options) {
     Traits _traits = new Traits();
     if (traits.hasKey("Email")) {
-      _traits.putEmail(traits.getString("Email");
+      _traits.putEmail(traits.getString("Email"));
     }
     if (traits.hasKey("CreatedAt")) {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
