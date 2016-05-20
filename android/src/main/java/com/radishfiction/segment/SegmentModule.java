@@ -47,7 +47,7 @@ public class SegmentModule extends ReactContextBaseJavaModule {
     if (traits.hasKey("CreatedAt")) {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
     }
-    copyElements(traits, _traits)
+    copyElements(traits, _traits);
     Analytics.with(context).identify(userId, _traits, null);
   }
 
