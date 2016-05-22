@@ -1,7 +1,15 @@
+package com.radishfiction.segment;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Traits;
+import com.segment.analytics.Properties;
+import com.segment.analytics.ValueMap;
 
 public class SegmentModule extends ReactContextBaseJavaModule {
   public SegmentModule(ReactApplicationContext reactContext) {
@@ -15,25 +23,25 @@ public class SegmentModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void setup(String writeKey) {
-    Analytics analytics = new Anlytics.Builder(context, writeKey)
+    Analytics analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
       .trackApplicationLifecycleEvents()
       .build();
     Analytics.setSingletonInstance(analytics);
   }
 
-  private <T> void copyElements(ReadableMap map, T target) {
-    Iterator it = map.keySetIterator();
+  private <T extends ValueMap> void copyElements(ReadableMap map, T target) {
+    ReadableMapKeySetIterator it = map.keySetIterator();
     while (it.hasNextKey()) {
       String key = it.nextKey();
       switch (map.getType(key)) {
-        case "Boolean":
-          target.putValue(traits.getBoolean(key));
+        case Boolean:
+          target.putValue(key, new Boolean(map.getBoolean(key)));
           break;
-        case "Number": // TODO: What about Double?
-          target.putValue(traits.getInt(key));
+        case Number: // TODO: What about Double?
+          target.putValue(key, new Integer(map.getInt(key)));
           break;
-        case "String":
-          target.putValue(traits.getString(key));
+        case String:
+          target.putValue(key, map.getString(key));
           break;
       }
     }
@@ -49,20 +57,20 @@ public class SegmentModule extends ReactContextBaseJavaModule {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
     }
     copyElements(traits, _traits);
-    Analytics.with(context).identify(userId, _traits, null);
+    Analytics.with(getCurrentActivity()).identify(userId, _traits, null);
   }
 
   @ReactMethod
   public void screen(String category, String name, ReadableMap properties, ReadableMap options) {
-    Properties _props = new Properties();
+    Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(context).screen(category, name, _properties, null);
+    Analytics.with(getCurrentActivity()).screen(category, name, _properties, null);
   }
 
   @ReactMethod
   public void track(String event, ReadableMap properties, ReadableMap options) {
-    Properties _props = new Properties();
+    Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(context).track(event, _properties, null);
+    Analytics.with(getCurrentActivity()).track(event, _properties, null);
   }
 }

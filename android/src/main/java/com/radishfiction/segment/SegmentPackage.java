@@ -1,4 +1,4 @@
-package com.radishfiction;
+package com.radishfiction.segment;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -9,6 +9,8 @@ import com.facebook.react.uimanager.ViewManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.radishfiction.segment.SegmentModule;
 
 public class SegmentPackage implements ReactPackage {
   @Override
