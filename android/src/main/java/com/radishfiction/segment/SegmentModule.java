@@ -48,7 +48,7 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void identity(String userId, ReadableMap traits, ReadableMap options) {
+  public void identify(String userId, ReadableMap traits, ReadableMap options) {
     Traits _traits = new Traits();
     if (traits.hasKey("Email")) {
       _traits.putEmail(traits.getString("Email"));
