@@ -12,8 +12,11 @@ import com.segment.analytics.Properties;
 import com.segment.analytics.ValueMap;
 
 public class SegmentModule extends ReactContextBaseJavaModule {
+  private Analytics analytics;
+
   public SegmentModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    analytics = null;
   }
 
   @Override
@@ -23,8 +26,8 @@ public class SegmentModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void setup(String writeKey, int flushQueueSize) {
-    Analytics analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
-      .trackApplicationLifecycleEvents()
+    analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
+      //.trackApplicationLifecycleEvents()
       .flushQueueSize(flushQueueSize)
       .build();
     Analytics.setSingletonInstance(analytics);
@@ -49,65 +52,62 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void identifyWithTraitsAndOptions(String userId, ReadableMap traits, ReadableMap options) {
-    Traits _traits = new Traits();
-    if (traits.hasKey("Email")) {
-      _traits.putEmail(traits.getString("Email"));
-    }
-    if (traits.hasKey("CreatedAt")) {
-      _traits.putCreatedAt(traits.getString("CreatedAt"));
-    }
-    copyElements(traits, _traits);
-    Options _options = new Options();
-    copyElements(options, _options);
-    Analytics.with(getCurrentActivity()).identify(userId, _traits, _options);
-  }
-
-  @ReactMethod
   public void identifyWithTraits(String userId, ReadableMap traits) {
-    identify(userId, traits, null);
+    if (analytics == null) {
+      return;
+    }
+    Traits _traits = null;
+    if (traits != null) {
+      _traits = new Traits();
+      if (traits.hasKey("Email")) {
+        _traits.putEmail(traits.getString("Email"));
+      }
+      if (traits.hasKey("CreatedAt")) {
+        _traits.putCreatedAt(traits.getString("CreatedAt"));
+      }
+      copyElements(traits, _traits);
+    }
+    Analytics.with(getCurrentActivity()).identify(userId, _traits, null);
   }
 
   @ReactMethod
   public void identify(String userId) {
-    identify(userId, null, null);
-  }
-
-  @ReactMethod
-  public void screenWithPropsAndOptions(String name, ReadableMap properties, ReadableMap options) {
-    Properties _properties = new Properties();
-    copyElements(properties, _properties);
-    Options _options = new Options();
-    copyElements(options, _options);
-    Analytics.with(getCurrentActivity()).screen(name, _properties, _options);
+    identifyWithTraits(userId, null);
   }
 
   @ReactMethod
   public void screenWithProps(String name, ReadableMap properties) {
-    screen(name, properties, null);
+    if (analytics == null) {
+      return;
+    }
+    Properties _properties = null;
+    if (properties != null) {
+      _properties = new Properties();
+      copyElements(properties, _properties);
+    }
+    Analytics.with(getCurrentActivity()).screen(null, name, _properties, null);
   }
 
   @ReactMethod
   public void screen(String name) {
-    screen(name, null, null);
-  }
-
-  @ReactMethod
-  public void trackWithPropsAndOptions(String event, ReadableMap properties, ReadableMap options) {
-    Properties _properties = new Properties();
-    copyElements(properties, _properties);
-    Options _options = new Options();
-    copyElements(options, _options);
-    Analytics.with(getCurrentActivity()).track(event, _properties, _options);
+    screenWithProps(name, null);
   }
 
   @ReactMethod
   public void trackWithProps(String event, ReadableMap properties) {
-    track(event, properties, null);
+    if (analytics == null) {
+      return;
+    }
+    Properties _properties = null;
+    if (properties != null) {
+      _properties = new Properties();
+      copyElements(properties, _properties);
+    }
+    Analytics.with(getCurrentActivity()).track(event, _properties, null);
   }
 
   @ReactMethod
   public void track(String event) {
-    track(event, null, null);
+    trackWithProps(event, null);
   }
 }
