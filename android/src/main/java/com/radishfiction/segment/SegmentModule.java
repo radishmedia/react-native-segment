@@ -72,20 +72,20 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void screen(String category, String name, ReadableMap properties, ReadableMap options) {
+  public void screen(String name, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(getCurrentActivity()).screen(category, name, _properties, options);
+    Analytics.with(getCurrentActivity()).screen(name, _properties, options);
   }
 
   @ReactMethod
-  public void screen(String category, String name, ReadableMap properties) {
-    screen(category, name, properties, null);
+  public void screen(String name, ReadableMap properties) {
+    screen(name, properties, null);
   }
 
   @ReactMethod
-  public void screen(String category, String name) {
-    screen(category, name, null, null);
+  public void screen(String name) {
+    screen(name, null, null);
   }
 
   @ReactMethod
