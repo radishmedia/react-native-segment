@@ -49,7 +49,7 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void identify(String userId, ReadableMap traits, ReadableMap options) {
+  public void identifyWithTraitsAndOptions(String userId, ReadableMap traits, ReadableMap options) {
     Traits _traits = new Traits();
     if (traits.hasKey("Email")) {
       _traits.putEmail(traits.getString("Email"));
@@ -62,7 +62,7 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void identify(String userId, ReadableMap traits) {
+  public void identifyWithTraits(String userId, ReadableMap traits) {
     identify(userId, traits, null);
   }
 
@@ -72,14 +72,14 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void screen(String name, ReadableMap properties, ReadableMap options) {
+  public void screenWithPropsAndOptions(String name, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
     Analytics.with(getCurrentActivity()).screen(name, _properties, options);
   }
 
   @ReactMethod
-  public void screen(String name, ReadableMap properties) {
+  public void screenWithProps(String name, ReadableMap properties) {
     screen(name, properties, null);
   }
 
@@ -89,14 +89,14 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void track(String event, ReadableMap properties, ReadableMap options) {
+  public void trackWithPropsAndOptions(String event, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
     Analytics.with(getCurrentActivity()).track(event, _properties, options);
   }
 
   @ReactMethod
-  public void track(String event, ReadableMap properties) {
+  public void trackWithProps(String event, ReadableMap properties) {
     track(event, properties, null);
   }
 
