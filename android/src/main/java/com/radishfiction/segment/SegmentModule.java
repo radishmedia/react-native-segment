@@ -58,7 +58,9 @@ public class SegmentModule extends ReactContextBaseJavaModule {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
     }
     copyElements(traits, _traits);
-    Analytics.with(getCurrentActivity()).identify(userId, _traits, options);
+    Options _options = new Options();
+    copyElements(options, _options);
+    Analytics.with(getCurrentActivity()).identify(userId, _traits, _options);
   }
 
   @ReactMethod
@@ -75,7 +77,9 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   public void screenWithPropsAndOptions(String name, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(getCurrentActivity()).screen(name, _properties, options);
+    Options _options = new Options();
+    copyElements(options, _options);
+    Analytics.with(getCurrentActivity()).screen(name, _properties, _options);
   }
 
   @ReactMethod
@@ -92,7 +96,9 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   public void trackWithPropsAndOptions(String event, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(getCurrentActivity()).track(event, _properties, options);
+    Options _options = new Options();
+    copyElements(options, _options);
+    Analytics.with(getCurrentActivity()).track(event, _properties, _options);
   }
 
   @ReactMethod
