@@ -22,9 +22,10 @@ public class SegmentModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void setup(String writeKey) {
+  public void setup(String writeKey, int flushQueueSize) {
     Analytics analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
       .trackApplicationLifecycleEvents()
+      .flushQueueSize(flushQueueSize)
       .build();
     Analytics.setSingletonInstance(analytics);
   }
@@ -37,8 +38,8 @@ public class SegmentModule extends ReactContextBaseJavaModule {
         case Boolean:
           target.putValue(key, new Boolean(map.getBoolean(key)));
           break;
-        case Number: // TODO: What about Double?
-          target.putValue(key, new Integer(map.getInt(key)));
+        case Number:
+          target.putValue(key, new Double(map.getDouble(key)));
           break;
         case String:
           target.putValue(key, map.getString(key));
@@ -57,20 +58,50 @@ public class SegmentModule extends ReactContextBaseJavaModule {
       _traits.putCreatedAt(traits.getString("CreatedAt"));
     }
     copyElements(traits, _traits);
-    Analytics.with(getCurrentActivity()).identify(userId, _traits, null);
+    Analytics.with(getCurrentActivity()).identify(userId, _traits, options);
+  }
+
+  @ReactMethod
+  public void identify(String userId, ReadableMap traits) {
+    identify(userId, traits, null);
+  }
+
+  @ReactMethod
+  public void identify(String userId) {
+    identify(userId, null, null);
   }
 
   @ReactMethod
   public void screen(String category, String name, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(getCurrentActivity()).screen(category, name, _properties, null);
+    Analytics.with(getCurrentActivity()).screen(category, name, _properties, options);
+  }
+
+  @ReactMethod
+  public void screen(String category, String name, ReadableMap properties) {
+    screen(category, name, properties, null);
+  }
+
+  @ReactMethod
+  public void screen(String category, String name) {
+    screen(category, name, null, null);
   }
 
   @ReactMethod
   public void track(String event, ReadableMap properties, ReadableMap options) {
     Properties _properties = new Properties();
     copyElements(properties, _properties);
-    Analytics.with(getCurrentActivity()).track(event, _properties, null);
+    Analytics.with(getCurrentActivity()).track(event, _properties, options);
+  }
+
+  @ReactMethod
+  public void track(String event, ReadableMap properties) {
+    track(event, properties, null);
+  }
+
+  @ReactMethod
+  public void track(String event) {
+    track(event, null, null);
   }
 }
