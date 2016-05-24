@@ -26,11 +26,14 @@ public class SegmentModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void setup(String writeKey, int flushQueueSize) {
-    analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
-      //.trackApplicationLifecycleEvents()
-      .flushQueueSize(flushQueueSize)
-      .build();
-    Analytics.setSingletonInstance(analytics);
+    try {
+      analytics = new Analytics.Builder(getCurrentActivity(), writeKey)
+        //.trackApplicationLifecycleEvents()
+        .flushQueueSize(flushQueueSize)
+        .build();
+      Analytics.setSingletonInstance(analytics);
+    } catch (java.lang.IllegalStateException ise) {
+    }
   }
 
   private <T extends ValueMap> void copyElements(ReadableMap map, T target) {
