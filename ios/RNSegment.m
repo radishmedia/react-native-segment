@@ -10,7 +10,6 @@ RCT_EXPORT_METHOD(setup:(NSString* )writeKey flushQueueSize:(int)flushQueueSize)
 {
   SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:writeKey];
   configuration.flushAt = flushQueueSize;
-  configuration.shouldUseLocationServices = NO;
   [SEGAnalytics setupWithConfiguration:configuration];
 }
 
